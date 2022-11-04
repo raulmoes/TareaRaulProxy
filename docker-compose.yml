@@ -1,0 +1,19 @@
+version: '3'
+services:
+  webdav:
+    image: bytemark/webdav
+    restart: always
+    hostname: web
+    environment:
+      AUTH_TYPE: Digest
+      USERNAME: frodo
+      PASSWORD: bolson
+      LOCATION: /webdavraulmorales
+    volumes:
+      - /srv/dav:/var/lib/dav
+  proxy:
+    image: nginx
+    ports:
+     - 80:80
+    volumes:
+     - ./conf/nginx/nginx.conf/:/etc/nginx/conf.d/default.conf:ro
